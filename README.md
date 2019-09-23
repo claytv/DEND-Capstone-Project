@@ -10,6 +10,7 @@ This ETL could be run as flight and/or weather data is collected. The BTS releas
 ## Requirements 
 * Python 3.6 
 * Apache Airflow 
+* Amazon Redshift cluster 
 
 ## Files and Directories 
 * dend_capstone/create_tables_task.py - Airflow DAG to create tables in Redshift
@@ -17,7 +18,9 @@ This ETL could be run as flight and/or weather data is collected. The BTS releas
 * dend_captsone/helpers - Contains Airflow operators and SQL statements 
 
 ## Instructions
-Begin by 
+Start by launching a Redshift cluster. Now open the Airflow UI and add a connection to your cluster under 'redshift' and add your AWS credentials under connection 'aws_credentials'. Next, trigger dag named "create_table_task" which will create the tables in Redshift. Lastly, trigger the dag named "ETLDag" which will copy the data from S3 into Redshift and fill the fact and dimension tables. 
+
+Tables are now ready for analysis 
 ## DATA  
 
 * [Global Weather Data](https://www.kaggle.com/berkeleyearth/climate-change-earth-surface-temperature-data) - Weather data from around the world 
@@ -31,9 +34,9 @@ Begin by
 * staging_demographics 
 
 ### Fact Tables 
-* Flights
-* Weather 
-* Demographics 
+* flights
+* weather 
+* demographics 
 ### Dimension Tables
 * cities 
 * time 
