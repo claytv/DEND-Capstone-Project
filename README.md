@@ -27,7 +27,7 @@ Tables are now ready for analysis.
 * [US Flight Data](https://www.transtats.bts.gov/DL_SelectFields.asp?Table_ID=236) - Flight data for US flights from 2009 - 2019
 * [US Demographics Data](https://www.kaggle.com/berkeleyearth/climate-change-earth-surface-temperature-data) - Demographics for US cities 
 ## DATABASE SCHEMA
-I chose this schema because it allowed for the data to be easily understood and easy to query. 
+I chose this schema because it allowed for the data to be easily understood and easy to query. The flight and weather data each reference the cities and time table so it felt correct to design my schema around these two tables. Demographics table also references the cities table which allows for a relationship to be made between flights, weather and demographics. 
 
 ### Staging Tables 
 * staging_weather
@@ -48,15 +48,27 @@ I chose this schema because it allowed for the data to be easily understood and 
 ![schema](schema.png)
 
 
-## Workflow 
+## Workflow
 
-I used Apache Airflow to load the data from S3 to staging tables in Redshift. I then filled the fact and dimension tables by pulling data from the staging tables. 
+I used Apache Airflow to load the data from S3 to staging tables in Redshift. I then filled the fact and dimension tables by pulling data from the staging tables. I chose to use Airflow because it works extremly well for automating pipelines/workflows like this. The only "heavylifting" of this project was building the operators and writing SQL queries. I chose to use redshift because it is easy to integrate into a DAG and Redshifts copy command works well when reading data from S3. 
 
 ![airflow](airflow_workflow.png)
 
-## Difficulties 
+## Theoretical Scenarios 
 
-I struggled with determining what schema would work better for this data.
+Udacity's rubric for this project requires us to address the following three hypothetical scenarios and how I would adjust for them. 
+#### Scenarios 
+1. The data was increased by 100x.
+2. The pipelines would be run on a daily basis by 7 am every day.
+3. The database needed to be accessed by 100+ people.
+
+#### Adjustments 
+1. If the data increased by 100x in size I would continue using Redshift and Airflow but I would increase the number of nodes on my Redshift cluster. However, if my model had more writing involved I would use Apache Spark for distributed computing. 
+
+2. If the pipelines needed to be run on a daily basis I would not have the tables be cleared when reloading the data in order to make it go faster. 
+
+3. I dont see any issue with 100+ people using the Redshift endpoint so this system could handle that. 
+
 
 ## Conclusion 
 
