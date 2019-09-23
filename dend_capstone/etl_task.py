@@ -10,7 +10,8 @@ from helpers import sql_queries as sq
 
 default_args = {
     'owner': 'claytv',
-    'start_date': datetime(2019, 9, 8)
+    'start_date': datetime(2019, 9, 8),
+    'schedule_interval': '@monthly'
 }
 
 dag = DAG('ETLDag',
@@ -41,7 +42,7 @@ staging_demographics_to_redshift = StageToRedshiftOperator(
         aws_credentials_id='aws_credentials',
         table='staging_us_demographics',
         s3_path='s3://claytv-dend-capstone/us-cities-demographics.csv',
-        copy_options="DELIMITER ';' IGNOREHEADER 1 DATEFORMAT 'YYYY-MM-DD'"
+        copy_options="DELIMITER';' IGNOREHEADER 1 DATEFORMAT 'YYYY-MM-DD'"
 )
 staging_flights_to_redshift = StageToRedshiftOperator(
         task_id='staging_flights',
