@@ -50,7 +50,7 @@ I chose this schema because it allowed for the data to be easily understood and 
 
 ## Workflow
 
-I used Apache Airflow to load the data from S3 to staging tables in Redshift. I then filled the fact and dimension tables by pulling data from the staging tables. I chose to use Airflow because it works extremly well for automating pipelines/workflows like this. The only "heavylifting" of this project was building the operators and writing SQL queries. I chose to use redshift because it is easy to integrate into a DAG and Redshifts copy command works well when reading data from S3. 
+I used Apache Airflow to load the data from S3 to staging tables in Redshift. I then filled the fact and dimension tables by pulling data from the staging tables. I chose to use Airflow because it works extremly well for automating pipelines/workflows like this. The only "heavylifting" of this project was building the operators and writing queries. I chose to use redshift because it is easy to integrate into a DAG and Redshifts copy command works well when reading data from S3. 
 
 ![airflow](airflow_workflow.png)
 
