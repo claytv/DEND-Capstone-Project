@@ -1,5 +1,5 @@
 # DEND-Captsone
-Capstone project for the data engineering nanodegree 
+Capstone project for the Udacity Data Engineering Nanodegree 
 
 ## SCOPE
 
