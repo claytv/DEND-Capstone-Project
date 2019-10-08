@@ -9,7 +9,7 @@ This ETL could be run as flight and/or weather data is collected. The BTS releas
 
 ## Requirements 
 * Python 3.6 
-* Apache Airflow - Allows for easy execution of ETL
+* Apache Airflow 1.10.5 - Allows for easy execution of ETL
 * Amazon Redshift cluster - Data storage
 
 ## Files and Directories 
