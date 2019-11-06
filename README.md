@@ -21,12 +21,12 @@ This ETL could be run as flight and/or weather data is collected. The BTS releas
 Start by launching a Redshift cluster. Now open the Airflow UI and add a connection to your cluster under 'redshift' and add your AWS credentials under connection 'aws_credentials'. Next, trigger dag named "create_table_task" which will create the tables in Redshift. Lastly, trigger the dag named "ETLDag" which will copy the data from S3 into Redshift and fill the fact and dimension tables. 
 
 Tables are now ready for analysis.
-## DATA  
+## Data  
 
 * [Global Weather Data](https://www.kaggle.com/berkeleyearth/climate-change-earth-surface-temperature-data) - Weather data from around the world 
 * [US Flight Data](https://www.transtats.bts.gov/DL_SelectFields.asp?Table_ID=236) - Flight data for US flights from 2009 - 2019
 * [US Demographics Data](https://www.kaggle.com/berkeleyearth/climate-change-earth-surface-temperature-data) - Demographics for US cities 
-## DATABASE SCHEMA
+## Schema
 I chose this schema because it allowed for the data to be easily understood and easy to query. The flight and weather data each reference the cities and time table so it felt correct to design my schema around these two tables. Demographics table also references the cities table which allows for a relationship to be made between flights, weather and demographics. 
 
 ### Staging Tables 
